@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 #include <regex>
@@ -6,7 +8,7 @@
 class LexicalAnalyzer {
 public:
     LexicalAnalyzer() = delete;
-    LexicalAnalyzer(const std::string& input_string) : source_code(input_string) {}
+    LexicalAnalyzer(const std::string& source_code) : source_code(source_code) {}
 
     enum class TokenType {
         int_keyword,

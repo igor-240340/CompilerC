@@ -4,6 +4,7 @@
 #include <format>
 
 #include "LexicalAnalyzer.h"
+#include "Parser.h"
 
 int main() {
     std::string c_program =
@@ -16,8 +17,12 @@ int main() {
 
     LexicalAnalyzer lexer{ c_program };
     std::vector<LexicalAnalyzer::Token> tokens = lexer.tokenize();
+    
     for (const LexicalAnalyzer::Token& token : tokens)
         std::cout << token.value << ' ';
+    std::cout << '\n';
+
+    Parser::parse(tokens);
 
     return 0;
 }
