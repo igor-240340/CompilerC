@@ -1,5 +1,5 @@
 #include <string>
-#include <vector>
+#include <list>
 #include <iostream>
 #include <format>
 
@@ -7,22 +7,27 @@
 #include "Parser.h"
 
 int main() {
-    std::string c_program =
-        "int main() {"
-        "    int a = 2;"
-        "    int b = 5;"
-        "    int c = a + b;"
-        "    return c;"
-        "}";
+    try {
+        std::string c_program =
+            "int main() {"
+            "    int a = 2;"
+            "    int b = 5;"
+            "    int c = a + b;"
+            "    return c;"
+            "}";
 
-    LexicalAnalyzer lexer{ c_program };
-    std::vector<LexicalAnalyzer::Token> tokens = lexer.tokenize();
-    
-    for (const LexicalAnalyzer::Token& token : tokens)
-        std::cout << token.value << ' ';
-    std::cout << '\n';
+        std::list<LexicalAnalyzer::Token> tokens = LexicalAnalyzer::tokenize(c_program);
+        for (const LexicalAnalyzer::Token& token : tokens)
+            std::cout << token.value << ' ';
 
-    Parser::parse(tokens);
+        std::cout << '\n';
 
-    return 0;
+        Parser::parse(tokens);
+
+        return 0;
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 }

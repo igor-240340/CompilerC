@@ -1,15 +1,12 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <list>
 #include <regex>
 #include <unordered_map>
 
 class LexicalAnalyzer {
 public:
-    LexicalAnalyzer() = delete;
-    LexicalAnalyzer(const std::string& source_code) : source_code(source_code) {}
-
     enum class TokenType {
         int_keyword,
         return_keyword,
@@ -28,7 +25,7 @@ public:
         TokenType type;
         std::string value;
     };
-    std::vector<Token> tokenize() {
+    static std::list<Token> tokenize(std::string& source_code) {
         const std::unordered_map<std::string, TokenType> keywords = {
             {"int", TokenType::int_keyword},
             {"return", TokenType::return_keyword}
@@ -44,7 +41,7 @@ public:
         std::regex int_literal_regex("^[0-9]+");
         std::regex semicolon_regex("^\\;");
 
-        std::vector<Token> tokens;
+        std::list<Token> tokens;
 
         std::smatch matches;
         std::regex matched_regex;
@@ -101,7 +98,4 @@ public:
 
         return tokens;
     }
-
-private:
-    std::string source_code;
 };
