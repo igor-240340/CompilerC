@@ -9,7 +9,7 @@
 int main() {
     try {
         std::string c_program =
-            "int main() {"
+            "int main(void) {"
             "    int a = 2;"
             "    int b = 5;"
             "    int c = a + b;"

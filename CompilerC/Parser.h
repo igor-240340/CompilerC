@@ -17,6 +17,13 @@ private:
 
     static void parse_function_definition(std::list<LexicalAnalyzer::Token>& tokens) {
         expect(tokens, LexicalAnalyzer::TokenType::int_keyword);
+        std::string func_name = parse_id(tokens);
+        expect(tokens, LexicalAnalyzer::TokenType::left_paren);
+        expect(tokens, LexicalAnalyzer::TokenType::void_keyword);
+        expect(tokens, LexicalAnalyzer::TokenType::right_paren);
+        expect(tokens, LexicalAnalyzer::TokenType::left_brace);
+        parse_statement(tokens);
+        expect(tokens, LexicalAnalyzer::TokenType::right_brace);
     }
 
     static bool expect(std::list<LexicalAnalyzer::Token>& tokens, LexicalAnalyzer::TokenType token_type) {
@@ -25,5 +32,18 @@ private:
             throw std::runtime_error(std::format("parser: unexpected token \"{}\".", next_token.value));
 
         tokens.pop_front();
+    }
+
+    static std::string parse_id(std::list<LexicalAnalyzer::Token>& tokens) {
+        LexicalAnalyzer::Token next_token = tokens.front();
+        if (next_token.type != LexicalAnalyzer::TokenType::identifier)
+            throw std::runtime_error(std::format("parser: unexpected token \"{}\".", next_token.value));
+
+        tokens.pop_front();
+
+        return next_token.value;
+    }
+
+    static void parse_statement(std::list<LexicalAnalyzer::Token>& tokens) {
     }
 };

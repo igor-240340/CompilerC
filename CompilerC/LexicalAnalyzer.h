@@ -8,6 +8,7 @@
 class LexicalAnalyzer {
 public:
     enum class TokenType {
+        void_keyword,
         int_keyword,
         return_keyword,
         identifier,
@@ -27,6 +28,7 @@ public:
     };
     static std::list<Token> tokenize(std::string& source_code) {
         const std::unordered_map<std::string, TokenType> keywords = {
+            {"void", TokenType::void_keyword},
             {"int", TokenType::int_keyword},
             {"return", TokenType::return_keyword}
         };
