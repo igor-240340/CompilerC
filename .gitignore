@@ -4,3 +4,5 @@ x64/
 *.asm
 *.obj
 *.exe
+*.bat
+!build.bat
