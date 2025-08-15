@@ -10,10 +10,7 @@ int main() {
     try {
         std::string c_program =
             "int main(void) {"
-            "    int a = 2;"
-            "    int b = 5;"
-            "    int c = a + b;"
-            "    return c;"
+            "    return 12;"
             "}";
 
         std::list<LexicalAnalyzer::Token> tokens = LexicalAnalyzer::tokenize(c_program);
