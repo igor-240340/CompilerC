@@ -19,7 +19,7 @@ int main() {
 
         std::cout << '\n';
 
-        Parser::parse(tokens);
+        std::unique_ptr<Parser::Stmt> root = Parser::parse(tokens);
 
         return 0;
     }
