@@ -29,7 +29,7 @@
     <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AsmGen.h">
+    <ClInclude Include="Asm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
