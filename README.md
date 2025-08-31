@@ -16,7 +16,7 @@ For now can compile just a simple main function with return statement.
 3. Finally we walk through Assembly AST and generate Assembly instructions compatible with MASM.
 
 To build exe from output assembly file run `masm_build.bat`.  
-[!NOTE]
-You have to have Visual Studio installed so `x64 Native Tools Command Prompt` is available.
-You can either to run `x64 Native Tools Command Prompt` and then locate and run `masm_build.bat`
-or you can just locate ml64.exe and add it's directory to Path so you can run `masm_build.bat` from anywhere.
+> [!NOTE]
+> You have to have Visual Studio installed so `x64 Native Tools Command Prompt` is available.
+> You can either to run `x64 Native Tools Command Prompt` and then locate and run `masm_build.bat`
+> or you can just locate ml64.exe and add it's directory to Path so you can run `masm_build.bat` from anywhere.
