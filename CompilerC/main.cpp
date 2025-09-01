@@ -23,9 +23,8 @@ int main() {
 
 		std::cout << '\n';
 
-		std::unique_ptr<Parser::Function> c_ast_root = Parser::parse(tokens);
-
-		std::string asm_program = Asm::generate(*c_ast_root);
+		Parser::Function c_ast_root = Parser::parse(tokens);
+		std::string asm_program = Asm::generate(c_ast_root);
 		std::ofstream asm_file("output.asm");
 		asm_file << asm_program;
 

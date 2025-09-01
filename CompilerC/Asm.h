@@ -58,8 +58,12 @@ public:
 	// It expects C function 'main' and converts it into Assembly function 'main' as a root.
 	// Then produces Assembly source code.
 	static std::string generate(const Parser::Function& c_ast_root) {
-		std::unique_ptr<Asm::Function> asm_ast_root = std::make_unique<Function>(c_ast_root.name, convert_statement(*(c_ast_root.body)));
-		return emit(*asm_ast_root);
+		Asm::Function asm_ast_root{ c_ast_root.name, convert_statement(*(c_ast_root.body)) };
+
+		std::string res = "\t.code\n\n";
+		res += asm_ast_root.emit();
+		res += "\n\tEND\n";
+		return res;
 	}
 
 private:
@@ -82,12 +86,5 @@ private:
 		const Parser::IntLiteral& int_literal = static_cast<const Parser::IntLiteral&>(expr);
 
 		return std::make_unique<ImmConst>(int_literal.value);
-	}
-
-	static std::string emit(const Asm::Function& func) {
-		std::string res = "\t.code\n\n";
-		res += func.emit();
-		res += "\n\tEND\n";
-		return res;
 	}
 };

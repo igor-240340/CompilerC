@@ -24,16 +24,16 @@ public:
 	};
 
 public:
-	static std::unique_ptr<Function> parse(std::list<LexicalAnalyzer::Token>& tokens) {
+	static Function parse(std::list<LexicalAnalyzer::Token>& tokens) {
 		return parse_program(tokens);
 	}
 
 private:
-	static std::unique_ptr<Function> parse_program(std::list<LexicalAnalyzer::Token>& tokens) {
+	static Function parse_program(std::list<LexicalAnalyzer::Token>& tokens) {
 		return parse_function_definition(tokens);
 	}
 
-	static std::unique_ptr<Function> parse_function_definition(std::list<LexicalAnalyzer::Token>& tokens) {
+	static Function parse_function_definition(std::list<LexicalAnalyzer::Token>& tokens) {
 		expect(tokens, LexicalAnalyzer::TokenType::int_keyword);
 		std::string func_name = parse_id(tokens);
 		expect(tokens, LexicalAnalyzer::TokenType::left_paren);
@@ -42,7 +42,8 @@ private:
 		expect(tokens, LexicalAnalyzer::TokenType::left_brace);
 		std::unique_ptr<Stmt> body = parse_statement(tokens);
 		expect(tokens, LexicalAnalyzer::TokenType::right_brace);
-		return std::make_unique<Function>(func_name, std::move(body));
+
+		return Function{ func_name, std::move(body) };
 	}
 
 	static void expect(std::list<LexicalAnalyzer::Token>& tokens, LexicalAnalyzer::TokenType token_type) {
